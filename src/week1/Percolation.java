@@ -17,7 +17,7 @@ public class Percolation {
         this.top = 0;
         this.bottom = n * n + 1;
         this.grid = new boolean[n][n];
-        this.uf = new WeightedQuickUnionUF(n * n + 2); //0, 1, ..., n * n, n * n + 1
+        this.uf = new WeightedQuickUnionUF(n * n + 2); // 0, 1, ..., n * n, n * n + 1
     }
 
     // open site (row, col) if it is not open already
