@@ -8,7 +8,7 @@
 # *************************************************
 
 # This must match the install directory
-INSTALL=/usr/local/algs4
+INSTALL=`dirname $0`
 JAVA=java
 
 # Find most recent version of Checkstyle

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This must match the install directory.
-INSTALL=/usr/local/algs4
+INSTALL=`dirname $0`
 
 # Sets the path to the textbook libraries.
 CLASSPATH=(.:${INSTALL}/algs4.jar)

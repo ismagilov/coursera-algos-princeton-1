@@ -5,7 +5,7 @@
 #
 #  To see descriptions of bugs:  http://findbugs.sourceforge.net/bugDescriptions.html
 
-INSTALL=/usr/local/algs4
+INSTALL=`dirname $0`
 JAVA=java
 AUX_CLASSPATH=${INSTALL}/algs4.jar
 
