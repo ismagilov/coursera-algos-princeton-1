@@ -14,6 +14,11 @@ public class PercolationStats {
 
     // perform trials independent experiments on an n-by-n grid
     public PercolationStats(int n, int trials) {
+        if (n <= 0)
+            throw new IllegalArgumentException("Dimension must be positive");
+        if (trials <= 0)
+            throw new IllegalArgumentException("The number of trials must be positive");
+
         this.n = n;
         this.trials = trials;
 
@@ -60,12 +65,7 @@ public class PercolationStats {
 
     public static void main(String[] args) {
         int n = Integer.parseInt(args[0]);
-        if (n <= 0)
-            throw new IllegalArgumentException("Dimension must be positive");
-
         int trials = Integer.parseInt(args[1]);
-        if (trials <= 0)
-            throw new IllegalArgumentException("The number of trials must be positive");
 
         PercolationStats ps = new PercolationStats(n, trials);
 
