@@ -59,10 +59,10 @@ public class PercolationStats {
     }
 
     public static void main(String[] args) {
-        int n = Integer.valueOf(args[0]);
-        int T = Integer.valueOf(args[1]);
+        int n = Integer.parseInt(args[0]);
+        int trials = Integer.parseInt(args[1]);
 
-        PercolationStats ps = new PercolationStats(n, T);
+        PercolationStats ps = new PercolationStats(n, trials);
 
         StdOut.println("mean                    = " + ps.mean());
         StdOut.println("stddev                  = " + ps.stddev());
