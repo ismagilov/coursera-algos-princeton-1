@@ -5,7 +5,8 @@ public class Percolation {
     private final int top;
     private final int bottom;
     private final boolean[][] grid;
-    private final WeightedQuickUnionUF uf;
+    private final WeightedQuickUnionUF tbUf;
+    private final WeightedQuickUnionUF tUf;
 
     private int opened = 0;
 
@@ -17,7 +18,8 @@ public class Percolation {
         this.top = 0;
         this.bottom = n * n + 1;
         this.grid = new boolean[n][n];
-        this.uf = new WeightedQuickUnionUF(n * n + 2); // 0, 1, ..., n * n, n * n + 1
+        this.tbUf = new WeightedQuickUnionUF(n * n + 2); // 0, 1, ..., n * n, n * n + 1
+        this.tUf = new WeightedQuickUnionUF(n * n + 2);
     }
 
     // open site (row, col) if it is not open already
@@ -31,7 +33,7 @@ public class Percolation {
         opened++;
 
         if (row == 1)
-            unionWithSpecial(row, col, top);
+            unionWithTop(row, col);
         else if (row - 1 >= 1 && isOpen(row - 1, col))
             union(row, col, row - 1, col);
 
@@ -43,7 +45,7 @@ public class Percolation {
 
         // Avoid backwash: connect with virtual bottom only if there already exists connection with top
         if (row == n)
-            unionWithSpecial(row, col, bottom);
+            unionWithBottom(row, col);
         else if (row + 1 <= n && isOpen(row + 1, col))
             union(row, col, row + 1, col);
     }
@@ -69,19 +71,25 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates()  {
-        return uf.connected(top, bottom);
+        return tbUf.connected(top, bottom);
     }
 
     private boolean isConnectedWithTop(int row, int col) {
-        return uf.connected(cellToIdx(row, col), top);
+        return tUf.connected(cellToIdx(row, col), top);
     }
 
     private void union(int row1, int col1, int row2, int col2) {
-        uf.union(cellToIdx(row1, col1), cellToIdx(row2, col2));
+        tbUf.union(cellToIdx(row1, col1), cellToIdx(row2, col2));
+        tUf.union(cellToIdx(row1, col1), cellToIdx(row2, col2));
     }
 
-    private void unionWithSpecial(int row1, int col1, int specialIdx) {
-        uf.union(cellToIdx(row1, col1), specialIdx);
+    private void unionWithTop(int row1, int col1) {
+        tbUf.union(cellToIdx(row1, col1), top);
+        tUf.union(cellToIdx(row1, col1), top);
+    }
+
+    private void unionWithBottom(int row1, int col1) {
+        tbUf.union(cellToIdx(row1, col1), bottom);
     }
 
     private boolean readCell(int row, int col) {
