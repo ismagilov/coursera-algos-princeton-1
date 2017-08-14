@@ -42,7 +42,7 @@ public class Percolation {
             union(row, col, row, col + 1);
 
         // Avoid backwash: connect with virtual bottom only if there already exists connection with top
-        if (row == n && isConnectedWithTop(row, col))
+        if (row == n)
             unionWithSpecial(row, col, bottom);
         else if (row + 1 <= n && isOpen(row + 1, col))
             union(row, col, row + 1, col);
