@@ -4,3 +4,5 @@ findbugs-3.0.1
 out
 percolation.zip
 percolation-testing.zip
+*.iml
+queues-testing.zip
